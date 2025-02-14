@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Love Note</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: pink;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+            color: black;
+            overflow: hidden;
+        }
+        .instruction {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .envelope-container {
+            position: relative;
+            width: 500px;
+            margin: 50px auto;
+        }
+        .envelope {
+            position: relative;
+            width: 500px;
+            height: 400px;
+            background: red;
+            clip-path: polygon(50% 0%, 100% 40%, 100% 100%, 0% 100%, 0% 40%);
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out;
+        }
+        .envelope.open {
+            transform: rotateX(0deg);
+        }
+        .letter {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 450px;
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
+            overflow-y: auto;
+        }
+        .envelope.open + .letter {
+            opacity: 1;
+            height: auto;
+        }
+        .message-text {
+            font-size: 20px;
+            color: black;
+        }
+        h1 {
+            color: red;
+        }
+        .kiss-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .kiss-message {
+            font-size: 30px;
+            margin-top: 10px;
+            color: red;
+            display: none;
+        }
+        @keyframes floatHearts {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-600px) scale(0.5); opacity: 0; }
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 30px;
+            animation: floatHearts 5s linear infinite;
+        }
+        .flower {
+            position: absolute;
+            color: purple;
+            font-size: 30px;
+            animation: floatHearts 6s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Valentine's Day!</h1>
+    <p>From Ashley to Maliah</p>
+    <p class="instruction">Click on the envelope to reveal your message!</p>
+    <div class="envelope-container">
+        <div class="envelope" onclick="openEnvelope()"></div>
+        <div class="letter">
+            <div class="message-container" id="loveMessage">
+                <p class="message-text">You are a blessing beyond words, a Proverbs 31 woman whose kindness, strength, and grace inspire me every day. I thank God for you.</p>
+                <p class="message-text"><strong>"How beautiful you are, my darling! Oh, how beautiful! Your eyes behind your veil are doves. Your hair is like a flock of goats descending from the hills of Gilead. Your teeth are like a flock of sheep just shorn, coming up from the washing. Each has its twin; not one of them is alone. Your lips are like a scarlet ribbon; your mouth is lovely..."</strong> – Song of Songs 4:1-3</p>
+            </div>
+            <button class="kiss-button" onclick="showKiss()">Send a Kiss 💋</button>
+            <p class="kiss-message" id="kiss">😘💋</p>
+        </div>
+    </div>
+    <script>
+        function openEnvelope() {
+            document.querySelector(".envelope").classList.toggle("open");
+        }
+        function createFloatingElement(symbol, className) {
+            let element = document.createElement("div");
+            element.innerHTML = symbol;
+            element.classList.add(className);
+            element.style.left = Math.random() * 100 + "vw";
+            element.style.animationDuration = (Math.random() * 3 + 3) + "s";
+            document.body.appendChild(element);
+            setTimeout(() => { document.body.removeChild(element); }, 6000);
+        }
+        function showKiss() {
+            document.getElementById("kiss").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("kiss").style.display = "none";
+            }, 2000);
+        }
+        setInterval(() => createFloatingElement("❤️", "heart"), 500);
+        setInterval(() => createFloatingElement("🌸", "flower"), 700);
+    </script>
+</body>
+</html>
